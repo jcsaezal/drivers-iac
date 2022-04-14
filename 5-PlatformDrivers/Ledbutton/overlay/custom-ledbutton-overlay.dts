@@ -1,0 +1,29 @@
+/**
+ * Device Tree overlay for custom driver of the Bee board that uses a
+ * button and three LEDs
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+
+/dts-v1/;
+/plugin/;
+
+/ {
+   
+   compatible = "brcm,bcm2835"; 
+
+   fragment@0 {
+        target = <&soc>;
+        __overlay__ {
+            ledbutton {
+                compatible = "custom,ledbutton";
+                led-gpios = <&gpio 4 GPIO_ACTIVE_HIGH>,
+                        <&gpio 27 GPIO_ACTIVE_HIGH>,	
+                        <&gpio 25 GPIO_ACTIVE_HIGH>;
+                button-gpios = <&gpio 22 GPIO_ACTIVE_HIGH>;
+                initial-led-state = <1>;
+		};
+        };
+    };
+};
+
